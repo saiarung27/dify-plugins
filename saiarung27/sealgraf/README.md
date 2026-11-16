@@ -88,4 +88,4 @@ read as permission.
 
 ## Source repository
 
-https://github.com/langgenius/dify-plugins/tree/main/saiarung27/sealgraf
+https://github.com/saiarung27/dify-plugins/tree/sealgraf-source-v0.1.0/saiarung27/sealgraf
