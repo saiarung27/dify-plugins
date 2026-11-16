@@ -2,6 +2,8 @@ version: 0.1.0
 type: plugin
 author: saiarung27
 name: sealgraf
+repo: https://github.com/saiarung27/dify-plugins/tree/sealgraf-source-v0.1.0/saiarung27/sealgraf
+contact: support@sealgraf.com
 label:
   en_US: Sealgraf
 description:
