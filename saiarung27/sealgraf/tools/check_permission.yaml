@@ -60,6 +60,15 @@ parameters:
       - value: fuel
         label:
           en_US: Fuel
+      - value: services
+        label:
+          en_US: Services
+      - value: shipping
+        label:
+          en_US: Shipping
+      - value: repairs
+        label:
+          en_US: Repairs
   - name: amount_minor
     type: number
     form: llm

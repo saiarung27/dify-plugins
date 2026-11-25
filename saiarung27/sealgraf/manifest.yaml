@@ -1,8 +1,8 @@
-version: 0.1.0
+version: 0.1.1
 type: plugin
 author: saiarung27
 name: sealgraf
-repo: https://github.com/saiarung27/dify-plugins/tree/sealgraf-source-v0.1.0/saiarung27/sealgraf
+repo: https://github.com/saiarung27/dify-plugins/tree/sealgraf-source-v0.1.1/saiarung27/sealgraf
 contact: support@sealgraf.com
 label:
   en_US: Sealgraf
@@ -21,7 +21,7 @@ plugins:
   tools:
     - provider/sealgraf.yaml
 meta:
-  version: 0.1.0
+  version: 0.1.1
   arch:
     - amd64
     - arm64

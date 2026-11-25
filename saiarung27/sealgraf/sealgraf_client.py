@@ -54,6 +54,9 @@ CATEGORIES: tuple[str, ...] = (
     "materials",
     "equipment",
     "fuel",
+    "services",
+    "shipping",
+    "repairs",
 )
 
 # Decision outcomes (production: see/models.py DecisionOutcome).
@@ -128,7 +131,7 @@ class SealgrafClient:
             headers={
                 "X-API-Key": key,
                 "Content-Type": "application/json",
-                "User-Agent": "sealgraf-dify-plugin/0.1.0",
+                "User-Agent": "sealgraf-dify-plugin/0.1.1",
             },
             timeout=_TIMEOUT,
             transport=transport,
