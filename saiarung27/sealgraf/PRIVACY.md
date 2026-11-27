@@ -18,6 +18,11 @@ Sealgraf service only what the tool call contains:
 - `get_receipt`: the preauthorization id or receipt id (in the request path
   only).
 
+During credential setup, the plugin sends the fixed integration identifier
+`dify` to the authenticated validation endpoint. Sealgraf records this as
+authenticated setup separately from purchase activity. On older self-hosted
+servers without that endpoint, validation uses a receipt-list read.
+
 Every request carries the Sealgraf API key configured in the provider
 credentials, in the `X-API-Key` header, over HTTPS. The key is an
 agent-scope Sealgraf credential: it can check purchases and read its own
