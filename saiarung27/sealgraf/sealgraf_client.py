@@ -131,7 +131,7 @@ class SealgrafClient:
             headers={
                 "X-API-Key": key,
                 "Content-Type": "application/json",
-                "User-Agent": "sealgraf-dify-plugin/0.1.1",
+                "User-Agent": "sealgraf-dify-plugin/0.1.2",
             },
             timeout=_TIMEOUT,
             transport=transport,
@@ -197,17 +197,23 @@ class SealgrafClient:
     # -- endpoints --------------------------------------------------------
 
     def validate_key(self) -> None:
-        """The lightest authenticated read an agent key may make:
-        ``GET /v1/receipts?limit=1`` (production: see/api.py
-        ``list_receipts`` — no scope restriction, unlike
-        ``GET /v1/mandates``, which refuses agent-scope keys)."""
-        data = self._request("GET", "/v1/receipts", params={"limit": 1},
-                             expected=(200,))
-        if not isinstance(data.get("items"), list):
-            raise SealgrafError(
-                "Malformed response from Sealgraf (GET /v1/receipts): "
-                "expected an object with an 'items' list."
+        """Validate setup without reading receipts or creating a purchase check."""
+        try:
+            data = self._request(
+                "POST", "/v1/integrations/validate",
+                json_body={"integration_id": "dify"}, expected=(200,),
             )
+        except SealgrafApiError as exc:
+            if exc.status_code != 404:
+                raise
+            # Older self-hosted servers predate the setup endpoint.
+            data = self._request("GET", "/v1/receipts", params={"limit": 1},
+                                 expected=(200,))
+            if not isinstance(data.get("items"), list):
+                raise SealgrafError("Malformed credential-validation response.")
+            return
+        if data.get("ok") is not True or data.get("credential_accepted") is not True:
+            raise SealgrafError("Malformed credential-validation response.")
 
     def check_permission(
         self,

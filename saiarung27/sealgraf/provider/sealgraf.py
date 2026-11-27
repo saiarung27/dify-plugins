@@ -15,13 +15,10 @@ class SealgrafProvider(ToolProvider):
     def _validate_credentials(
         self, credentials: dict[str, Any]
     ) -> CredentialCheckResult | None:
-        """One cheap authenticated read: GET /v1/receipts?limit=1.
+        """Validate credentials through the Sealgraf setup endpoint.
 
-        That route carries no scope restriction (production see/api.py
-        ``list_receipts``), so an agent-scope key passes it, while a bad
-        key fails here with a 401 — at setup time, not mid-workflow.
-        Failures raise ToolProviderCredentialValidationError with a
-        message that names the likely cause.
+        Older self-hosted versions use the client's read-only fallback.
+        A successful validation records setup separately from purchase checks.
         """
         try:
             client = client_from_credentials(credentials)

@@ -16,15 +16,14 @@ is sealed into a receipt neither side can rewrite.
 
 ## Setup
 
-1. In Sealgraf, create an **agent-scope API key** bound to the limits set
-   (mandate) the agent should spend under.
-2. In Dify, install this plugin and set the provider credentials:
-   - **Sealgraf API Key** — the agent-scope key.
-   - **Sealgraf Base URL** — `https://sealgraf.com` (default). Change only
-     for UAT or a self-hosted deployment.
+1. [Get your Dify key](https://sealgraf.com/app/?integration=dify&source=dify_marketplace#/connect/dify/1). Sign in or create an account, set Dify's spending limits, and copy the key.
+2. In Dify, install Sealgraf and paste that key into **Sealgraf API Key**. Keep **Sealgraf Base URL** at its default, then save.
+3. [Download the first-check workflow](https://sealgraf.com/app/templates/dify-first-check.yml). In Dify Studio, choose **Import DSL file**, select the downloaded file, and choose your saved Sealgraf credentials in the **Check permission** node.
+4. Run with the default sample amount of 100 minor units ($1 for a USD limit), or enter another amount. Read the decision and its check ID in the output. Category and amount must match your own configured limits.
 
-Credential validation makes one authenticated read (`GET /v1/receipts`)
-so a bad key fails at setup time, not mid-workflow.
+This workflow creates one real permission check. An allowed check can temporarily reserve budget, and a check above your approval threshold can create a pending approval. It stops at the decision and has no payment or completion node. A receipt is produced only after a real completed purchase is reported.
+
+Credential validation uses the authenticated setup endpoint. Older self-hosted Sealgraf versions fall back to a receipt-list read. Validation does not create a purchase check.
 
 ## The spend loop
 

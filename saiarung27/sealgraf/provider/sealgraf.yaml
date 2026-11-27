@@ -17,8 +17,8 @@ credentials_for_provider:
     placeholder:
       en_US: Paste an agent-scope Sealgraf API key
     help:
-      en_US: Create an agent-scope key in Sealgraf, bound to the limits set this agent spends under. The key can check purchases and read its own receipts; it can never change limits or approve a purchase.
-    url: https://sealgraf.com
+      en_US: Use Get API key to sign in or create an account, set your Dify spending limits, and copy the key. Paste it here, then save. The key can check purchases and read its own receipts; it can never change limits or approve a purchase.
+    url: https://sealgraf.com/app/?integration=dify&source=dify_marketplace#/connect/dify/1
   sealgraf_base_url:
     type: text-input
     required: false
